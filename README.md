@@ -1,2 +1,2 @@
 # MLinPhysicsFinalProject
-The final project code, data, and documents for the Machine Learning in Physics course. The goal is to create an ML algorithm that can classify different particle groups from a PID plot created during nuclear experiments.
+The final project code, data, and documents for the Machine Learning in Physics course. The goal is to create an ML algorithm that can classify different particle groups from a PID plot created during nuclear experiments. If successful, it would be cool to try and make it also create a gate around the group of interest so that reaction can be gated upon for future analysis.
