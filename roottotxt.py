@@ -3,7 +3,10 @@ import glob
 import os
 import numpy as np
 import pandas as pd
-
+'''
+This file takes root files from an SPS experiment, converts the scintLeft (rest energy) and anodeBack (energy loss) data to panda dataframes, and saves the data to 
+.txt files.
+'''
 def roottotxt(root_files_dir, output_dir):
     # Set the directory containing the ROOT files
     root_files_dir = "/home/dhoulihan/Projects/SPS_CEBRA_Oct2022ad/Workingdir/analyzed"  # Replace with the path to your directory containing ROOT files
