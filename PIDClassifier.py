@@ -1,4 +1,4 @@
-import time
+# import time
 
 def PIDClassifier(particle_of_interest, 
                   magfield: float, 
@@ -55,7 +55,7 @@ def PIDClassifier(particle_of_interest,
     - Particle gate vertices if savefile = True
     
     """
-    time.sleep(2)
+    # time.sleep(2)
     SLABdat = load_data(path = datapath)
     
     X = "ScintLeft"; Y = "AnodeBack"
@@ -157,16 +157,19 @@ def PIDClassifier(particle_of_interest,
     particles = get_particle_class(centroids)
     print(f'Cluster centroids and labels: \n {particles}')
 
-    if particle_of_interest == 'All':
-        plotofinterest = plot_particles(labels, particles , centroids , data)
-    else:
-        plot_particles(labels, particles , centroids , data)
-        print('Check the gates and see if they are valid.')
-        # plot_particle_of_interest(labels, particles, centroids, data, f'{particle_of_interest}')
-        print('Checking gates with full dataset')
-        plotofinterest = plot_gate_fulldata(labels, particles, centroids, data, SLAB, f'{particle_of_interest}')
+    # partgroups = the datapoints within each group
+    # partlabels = the particle labels for each group
+    # partgates = the vertices of each particle gate
+    partgroups, partlabels, partgates = plot_particles(labels, particles , centroids , data)
+    
+    # plot_particles(labels, particles , centroids , data)
+    print('Check the gates and see if they are valid.')
+    
+    plotofinterest = plot_particle_of_interest(labels, particles, centroids, data, f'{particle_of_interest}')
+    print('Checking gates with full dataset')
+    # plot_gate_fulldata(labels, particles, centroids, data, SLAB, f'{particle_of_interest}')
         # print(plotofinterest)
-    return plotofinterest
+    # return plotofinterest
     
     if savefile == True:
         filename = f'{particle_of_interest}cut_{magfield}kG_{angle}deg.txt'
@@ -175,6 +178,6 @@ def PIDClassifier(particle_of_interest,
         # df.to_csv('output.txt', sep='\t', index=False)
     else:
         None
-
+    return partgroups, partlabels, partgates
     
     
