@@ -68,9 +68,6 @@ class ClusterPlots:
         ax[1].xaxis.set_minor_locator(ticker.MaxNLocator(20))
         ax[1].annotate(f"Total counts: {len(self.data['ScintLeft'])}", fontsize = 9, xy = [1200,2000])
         plt.subplots_adjust(wspace = 0.0)
-        # plt.savefig('Resampleddata.png')
-        # plt.tight_layout()
-        # plt.savefig('Resampleddata.png')
         plt.show()
         
         return None
@@ -95,7 +92,7 @@ class ClusterPlots:
         vertices = particle_pd.iloc[hull.vertices]
         vertices = pd.concat([vertices, vertices.iloc[[0]]])
         
-        return particle_pd, vertices
+        return vertices
     
     
     def plot_particles(self, labels, figsize = (12,12)):
@@ -120,37 +117,50 @@ class ClusterPlots:
         
         X = "ScintLeft"; Y = "AnodeBack"
         plt.figure(figsize = figsize)
-        if self.particles['Particle Label'].str.contains('Protons').any():
-            Proton_label = self.centroids.loc[self.centroids['Particle Label'] == 'Protons'].index[0]
-            Protons = self.data[labels == Proton_label]
-            ProtonGate = self.particle_gate(Protons)
-            plt.scatter(Protons[X], Protons[Y], marker = '.', color = 'purple', label = 'Protons')
-            plt.plot(ProtonGate[1][X], ProtonGate[1][Y], 'r--', lw=2)
-            # return ProtonGate
+        
+        X = "ScintLeft"; Y = "AnodeBack"
+        particle_list = ['Protons', 'Tritons', 'Deuterons', 'Alphas']
+        for particle in particle_list:
+            if self.particles['Particle Label'].str.contains(particle).any():
+                Part_label = self.centroids.loc[self.centroids['Particle Label'] == particle].index[0]
+                Parts = self.data[labels == Part_label]
+                PartGate = self.particle_gate(Parts)
+                plt.scatter(Parts[X], Parts[Y], marker = '.', label = f'{particle}')
+                plt.plot(PartGate[X], PartGate[Y], 'r--', lw=2)
             
-        if self.particles['Particle Label'].str.contains('Tritons').any():
-            Triton_label = self.centroids.loc[self.centroids['Particle Label'] == 'Tritons'].index[0]
-            Tritons = self.data[labels == Triton_label]
-            TritonGate = self.particle_gate(Tritons)
-            plt.scatter(Tritons[X], Tritons[Y],  marker = '.', label = 'Tritons')
-            plt.plot(TritonGate[1][X], TritonGate[1][Y], 'r--', lw=2)
-            # return TritonGate
+            
+            
+        # if self.particles['Particle Label'].str.contains('Protons').any():
+        #     Proton_label = self.centroids.loc[self.centroids['Particle Label'] == 'Protons'].index[0]
+        #     Protons = self.data[labels == Proton_label]
+        #     ProtonGate = self.particle_gate(Protons)
+        #     plt.scatter(Protons[X], Protons[Y], marker = '.', color = 'purple', label = 'Protons')
+        #     plt.plot(ProtonGate[X], ProtonGate[Y], 'r--', lw=2)
+        #     # return ProtonGate
+            
+        # if self.particles['Particle Label'].str.contains('Tritons').any():
+        #     Triton_label = self.centroids.loc[self.centroids['Particle Label'] == 'Tritons'].index[0]
+        #     Tritons = self.data[labels == Triton_label]
+        #     TritonGate = self.particle_gate(Tritons)
+        #     plt.scatter(Tritons[X], Tritons[Y],  marker = '.', label = 'Tritons')
+        #     plt.plot(TritonGate[X], TritonGate[Y], 'r--', lw=2)
+        #     # return TritonGate
         
-        if self.particles['Particle Label'].str.contains('Deuterons').any():
-            Deuteron_label = self.centroids.loc[self.centroids['Particle Label'] == 'Deuterons'].index[0]
-            Deuterons = self.data[labels == Deuteron_label]
-            DeuteronGate = self.particle_gate(Deuterons)
-            plt.scatter(Deuterons[X], Deuterons[Y],  marker = '.', label = 'Deuterons')
-            plt.plot(DeuteronGate[1][X], DeuteronGate[1][Y], 'r--', lw=2)
-            # return DeuteronGate
+        # if self.particles['Particle Label'].str.contains('Deuterons').any():
+        #     Deuteron_label = self.centroids.loc[self.centroids['Particle Label'] == 'Deuterons'].index[0]
+        #     Deuterons = self.data[labels == Deuteron_label]
+        #     DeuteronGate = self.particle_gate(Deuterons)
+        #     plt.scatter(Deuterons[X], Deuterons[Y],  marker = '.', label = 'Deuterons')
+        #     plt.plot(DeuteronGate[X], DeuteronGate[Y], 'r--', lw=2)
+        #     # return DeuteronGate
         
-        if self.particles['Particle Label'].str.contains('Alphas').any():
-            Alpha_label = self.centroids.loc[self.centroids['Particle Label'] == 'Alphas'].index[0]
-            Alphas = self.data[labels == Alpha_label]
-            AlphaGate = self.particle_gate(Alphas)
-            plt.scatter(Alphas[X], Alphas[Y],  marker = '.', label = 'Alphas')
-            plt.plot(AlphaGate[1][X], AlphaGate[1][Y], 'r--', lw=2)
-            # return AlphaGate
+        # if self.particles['Particle Label'].str.contains('Alphas').any():
+        #     Alpha_label = self.centroids.loc[self.centroids['Particle Label'] == 'Alphas'].index[0]
+        #     Alphas = self.data[labels == Alpha_label]
+        #     AlphaGate = self.particle_gate(Alphas)
+        #     plt.scatter(Alphas[X], Alphas[Y],  marker = '.', label = 'Alphas')
+        #     plt.plot(AlphaGate[X], AlphaGate[Y], 'r--', lw=2)
+        #     # return AlphaGate
             
         Outliers = self.data[labels == -1]
         plt.scatter(Outliers[X], Outliers[Y], color = 'grey', marker = '.', label = 'Outliers')
@@ -244,7 +254,7 @@ class ClusterPlots:
                 # plt.scatter(Labeled_Particles[X], Labeled_Particles[Y], marker = '.', color = 'purple', label = f'{particle}')
                 plt.hist2d(full_data[X], full_data[Y], bins = [512,512], range = [[0,2000],[0,2500]],
                            cmap = 'viridis', norm = colors.LogNorm(), alpha = 0.8)
-                plt.plot(ParticleGate[1][X], ParticleGate[1][Y], 'r--', lw=2)
+                plt.plot(ParticleGate[X], ParticleGate[Y], 'r--', lw=2)
                 
                 ax = plt.gca()
                 ax.xaxis.set_major_locator(ticker.MaxNLocator(nbins = 7))
