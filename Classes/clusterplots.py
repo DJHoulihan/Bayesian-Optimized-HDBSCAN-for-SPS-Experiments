@@ -32,14 +32,10 @@ class ClusterPlots:
         Plot subsets in a grid of subplots.
         
         Parameters:
-        - data: Data to be plotted
-            type: pandas Dataframe
-        -magfield: Magnetic field setting of the SE-SPS
-            type: float
-        - angle: The angle at which the SE-SPS is set to.
-            type: float
+        - fulldata: The full dataset inputted into the algorithm.
+            type: Pandas DataFrame
         - figsize: size of the figure
-            type: float
+            type: tuple
         
         Returns:
         - None
@@ -104,12 +100,8 @@ class ClusterPlots:
         Parameters:
         - labels: A list of labels associated to datapoints in data.
             type: ndarray
-        - particles: Dataframe containing centroid positions and associated particle label.
-            type: pandas DataFrame
-        - centroids: The centroids of the clusters.
-            type: pandas DataFrame
-        - data: The full data set used in clustering.
-            type: pandas DataFrame
+        - figsize: The size of the figure (length, height)
+            type: tuple
         
         Returns:
         - None
@@ -145,61 +137,25 @@ class ClusterPlots:
         
         return None
 
-    def plot_particle_of_interest(self,labels, particle_of_interest, figsize = (12,12)):
-        
+    def plot_gate_fulldata(self, labels, full_data, particle_of_interest, figsize = (12,12)):
         """
-        Plots the particle of interest and its associated gate 
-        constructed using particle_gate().
+        Plots the full data set and the particle of interest's gate.
         
         Parameters:
         - labels: A list of labels associated to datapoints in data.
             type: ndarray
-        - particles: Dataframe containing centroid positions and associated particle label.
-            type: pandas DataFrame
-        - centroids: The centroids of the clusters.
-            type: pandas DataFrame
-        - data: The full data set used in clustering.
-            type: pandas DataFrame
-        - particle_of_interest: The particle you want to gate on.
-            type: string
+        - fulldata: The full dataset inputted into the algorithm.
+            type: Pandas DataFrame
+        - particle_of_interest: Name of particle you want to gate around.
+            type: String
+            options: 'Proton', 'Triton', 'Deuteron', 'Alpha'
+        - figsize: The size of the figure (length, height)
+            type: tuple        
         
         Returns:
         - None
         """
         
-        def Outlierplot(self, labels):    
-            X = "ScintLeft"; Y = "AnodeBack"
-            Outliers = self.data[labels == -1]
-            plt.scatter(Outliers[X], Outliers[Y], color = 'grey', marker = '.', label = 'Outliers')
-            plt.xlabel('Rest Energy [arb. units]')
-            plt.ylabel('Energy Loss [arb. units]')
-            ax = plt.gca()
-            ax.xaxis.set_major_locator(ticker.MaxNLocator(nbins = 7))
-            ax.xaxis.set_minor_locator(AutoMinorLocator())
-            ax.yaxis.set_major_locator(ticker.MaxNLocator(nbins = 7))
-            ax.yaxis.set_minor_locator(AutoMinorLocator())
-            ax.tick_params(direction = 'in', which = 'both', top =True, right = True)
-            plt.legend(loc = 'upper right')
-            plt.show()
-            
-        X = "ScintLeft"; Y = "AnodeBack"
-        particle_list = ['Protons', 'Tritons', 'Deuterons', 'Alphas']
-        for particle in particle_list:
-            if self.particles['Particle Label'].str.contains(particle).any():
-                plt.figure(figsize = figsize)
-                plt.title(f'{particle} Gate')
-                Particle_label = self.centroids.loc[self.centroids['Particle Label'] == particle].index[0]
-                Labeled_Particles = self.data[labels == Particle_label]
-                ParticleGate = self.particle_gate(Labeled_Particles)
-                plt.scatter(Labeled_Particles[X], Labeled_Particles[Y], marker = '.', color = 'purple', label = f'{particle}')
-                plt.plot(ParticleGate[1][X], ParticleGate[1][Y], 'r--', lw=2)
-                Outlierplot(self.data, labels)
-                # return ProtonGate
-            else:
-                print('There are no {particle}!')
-        
-
-    def plot_gate_fulldata(self, labels, full_data, particle_of_interest, figsize = (12,12)):
         X = "ScintLeft"; Y = "AnodeBack"
         
         
