@@ -128,40 +128,6 @@ class ClusterPlots:
                 plt.scatter(Parts[X], Parts[Y], marker = '.', label = f'{particle}')
                 plt.plot(PartGate[X], PartGate[Y], 'r--', lw=2)
             
-            
-            
-        # if self.particles['Particle Label'].str.contains('Protons').any():
-        #     Proton_label = self.centroids.loc[self.centroids['Particle Label'] == 'Protons'].index[0]
-        #     Protons = self.data[labels == Proton_label]
-        #     ProtonGate = self.particle_gate(Protons)
-        #     plt.scatter(Protons[X], Protons[Y], marker = '.', color = 'purple', label = 'Protons')
-        #     plt.plot(ProtonGate[X], ProtonGate[Y], 'r--', lw=2)
-        #     # return ProtonGate
-            
-        # if self.particles['Particle Label'].str.contains('Tritons').any():
-        #     Triton_label = self.centroids.loc[self.centroids['Particle Label'] == 'Tritons'].index[0]
-        #     Tritons = self.data[labels == Triton_label]
-        #     TritonGate = self.particle_gate(Tritons)
-        #     plt.scatter(Tritons[X], Tritons[Y],  marker = '.', label = 'Tritons')
-        #     plt.plot(TritonGate[X], TritonGate[Y], 'r--', lw=2)
-        #     # return TritonGate
-        
-        # if self.particles['Particle Label'].str.contains('Deuterons').any():
-        #     Deuteron_label = self.centroids.loc[self.centroids['Particle Label'] == 'Deuterons'].index[0]
-        #     Deuterons = self.data[labels == Deuteron_label]
-        #     DeuteronGate = self.particle_gate(Deuterons)
-        #     plt.scatter(Deuterons[X], Deuterons[Y],  marker = '.', label = 'Deuterons')
-        #     plt.plot(DeuteronGate[X], DeuteronGate[Y], 'r--', lw=2)
-        #     # return DeuteronGate
-        
-        # if self.particles['Particle Label'].str.contains('Alphas').any():
-        #     Alpha_label = self.centroids.loc[self.centroids['Particle Label'] == 'Alphas'].index[0]
-        #     Alphas = self.data[labels == Alpha_label]
-        #     AlphaGate = self.particle_gate(Alphas)
-        #     plt.scatter(Alphas[X], Alphas[Y],  marker = '.', label = 'Alphas')
-        #     plt.plot(AlphaGate[X], AlphaGate[Y], 'r--', lw=2)
-        #     # return AlphaGate
-            
         Outliers = self.data[labels == -1]
         plt.scatter(Outliers[X], Outliers[Y], color = 'grey', marker = '.', label = 'Outliers')
         plt.xlabel('Rest Energy [arb. units]')
@@ -176,7 +142,6 @@ class ClusterPlots:
         ax.tick_params(direction = 'in', which = 'both', top =True, right = True)
         plt.legend(loc = 'upper right')
         plt.show()
-        
         
         return None
 
