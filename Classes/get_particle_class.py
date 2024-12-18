@@ -13,7 +13,14 @@ class GetParticleClass:
         self.Yrel_positions = np.zeros((len(self.centroids), len(self.centroids)))
     
     def classify_particle(self):
-        
+    """
+    Calculates the relative positions of each cluster, defines conditions to be met for identification,
+    and identifies clusters based on the conditions set. 
+
+    Returns:
+    - self.centroids: a pd DataFrame with a new column that labels each centroid position with the prescribed particle class
+        type: pd DataFrame
+    """        
         Xpos = self.centroids['Xpos']
         Ypos = self.centroids['Ypos']
         
@@ -86,7 +93,6 @@ class GetParticleClass:
                     sum(self.Xrel_positions[i,:] > 0) >= 1 and
                     sum(self.Yrel_positions[i,:] > 0) >= 2 and
                     sum(self.Yrel_positions[i,:] < 0) >= 1) 
-                    
                         
                     )
         
