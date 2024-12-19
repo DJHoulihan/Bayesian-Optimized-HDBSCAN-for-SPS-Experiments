@@ -9,7 +9,7 @@ This file takes root files from an SPS experiment, converts the scintLeft (rest 
 '''
 def roottotxt(root_files_dir, output_dir):
     # Set the directory containing the ROOT files
-    root_files_dir = "/home/dhoulihan/Projects/SPS_CEBRA_Oct2022ad/Workingdir/analyzed"  # Replace with the path to your directory containing ROOT files
+    root_files_dir = root_files_dir  # Replace with the path to your directory containing ROOT files
     output_dir = "./SLABtxt/"  # Directory to save output .txt files
 
     # Get all the ROOT files in the directory (adjust the extension if necessary)
