@@ -17,4 +17,4 @@ density_aware_resample.py - The density_aware_resample.py file holds the resampl
 
 get_particle_class.py - Holds the GetParticleClass class. This is where the classify_particle function lies that calculates the relative positions of each cluster and assigns particle classes to each cluster.
 
-![Project Logo](images/logo.png)
+![Project Logo](images/AllfieldGates.png)
