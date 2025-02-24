@@ -16,3 +16,5 @@ clusterplots.py - The plotting functions are placed within the ClusterPlots clas
 density_aware_resample.py - The density_aware_resample.py file holds the resampling function
 
 get_particle_class.py - Holds the GetParticleClass class. This is where the classify_particle function lies that calculates the relative positions of each cluster and assigns particle classes to each cluster.
+
+![Project Logo](images/logo.png)
