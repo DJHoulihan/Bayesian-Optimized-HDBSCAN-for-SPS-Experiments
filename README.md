@@ -1,4 +1,4 @@
-# Machine Learning in Physics Final Project: Clustering Algorithm for Reaction Identification with the Super-Enge Split-Pole Spectrograph at the John D. Fox Laboratory
+# Clustering Algorithm for Reaction Identification with the Super-Enge Split-Pole Spectrograph at the John D. Fox Laboratory
 The final project code, data, and documents for the Machine Learning in Physics course. The goal is to create an ML algorithm that can classify different particle groups from a PID plot created during nuclear experiments. If successful, it would be cool to try and make it also create a gate around the group of interest so that reaction can be gated upon for future analysis.
 
 There are two forms of this algorithm: one constructed with python Classes and one with just functions. Each form is put in their respective folders. Outside of these directories, there is the roottotxt.py file which holds a function to take the PID data from a standard SE-SPS EventBuilder ROOT file and put it into a text file. 
